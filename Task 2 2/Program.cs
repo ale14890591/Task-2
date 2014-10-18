@@ -11,6 +11,7 @@ namespace Task_2_2
     {
         static void Main(string[] args)
         {
+            TextWork example = new TextWork(@"C:\Users\000\Desktop\a.txt");
         }
     }
 }
