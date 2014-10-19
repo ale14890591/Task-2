@@ -22,26 +22,69 @@ namespace Task_2_2
             }
         }
 
-        private List<WordListItem> list;
+        private List<WordListItem> concordance;
 
         public WordList()
         {
-            this.list = new List<WordListItem>();
+            this.concordance = new List<WordListItem>();
         }
 
         public void AddWord(string word)
         {
-            this.list.Add(new WordListItem(word));
+            this.concordance.Add(new WordListItem(word)); 
+
+            WordListItemsComparer comparer = new WordListItemsComparer();
+            this.concordance.Sort(comparer);
         }
 
-        public void WordOccurenceIncrement(int index)
+        public void WordOccurence(string word)
         {
-            this.list[index].Count++;
+            foreach (WordListItem i in concordance)
+            {
+                if (i.Word == word)
+                    i.Count++;
+            }
         }
 
-        public void WordOccurencePages(int index, int page)
+        public void WordOccurenceOnPage(string word, int page)
         {
-            this.list[index].Pages.Add(page);
+            foreach (WordListItem i in concordance)
+            {
+                if (i.Word == word && !i.Pages.Contains(page))
+                    i.Pages.Add(page);
+            }
+        }
+
+        public bool ContainsWord(string word)
+        {
+            foreach (WordListItem i in concordance)
+            {
+                if (i.Word == word)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public void Print()
+        {
+            foreach (WordListItem i in concordance)
+            {
+                Console.Write("{0} .. {1} times: pages ", i.Word, i.Count);
+                for (int j = 0; j < i.Pages.Count; j++)
+                {
+                    Console.Write("{0} ", i.Pages[j]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private class WordListItemsComparer : IComparer<WordListItem>
+        {
+            public int Compare(WordListItem x, WordListItem y)
+            {
+                return String.Compare(x.Word, y.Word);
+            }
         }
     }
 }

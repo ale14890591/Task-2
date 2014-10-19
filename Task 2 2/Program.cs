@@ -12,6 +12,13 @@ namespace Task_2_2
         static void Main(string[] args)
         {
             TextWork example = new TextWork(@"C:\Users\000\Desktop\a.txt");
+            TextAnalyzer A = new TextAnalyzer();
+            example = A.Normalizing(example);
+            WordList B = A.Analyzing(example);
+            B.Print();
+            
+
+            Console.ReadKey();
         }
     }
 }
