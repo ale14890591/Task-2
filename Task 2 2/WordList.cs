@@ -6,98 +6,165 @@ using System.Threading.Tasks;
 
 namespace Task_2_2
 {
-    public class WordList
+    public class WordList : IDictionary<string, List<PageLineCount>>
     {
-        private class WordListItem
-        {
-            public string Word {get;set;}
-            public int Count {get;set;}
-            public List<int> Pages {get;set;}
+        //key - word, value - list contains (indexes means pages): 
+        //in which line word appeared, how many times it appeared in this line
+        private Dictionary<string, List<PageLineCount>> concordance;
+        
 
-            public WordListItem(string word)
-            {
-                this.Word = word;
-                this.Count = 0;
-                this.Pages = new List<int>();
-            }
-        }
-
-
-
-        private List<WordListItem> concordance;
 
 
         //constructor
         public WordList()
         {
-            this.concordance = new List<WordListItem>();
+            this.concordance = new Dictionary<string, List<PageLineCount>>();            
         }
 
 
 
 
-        public void AddWord(string word)
-        {
-            this.concordance.Add(new WordListItem(word)); 
 
-            WordListItemsComparer comparer = new WordListItemsComparer();
-            this.concordance.Sort(comparer);
+        //public void AddWord(string word)
+        //{
+        //    this.concordance.Add(new WordListItem(word)); 
+
+        //    WordListItemsComparer comparer = new WordListItemsComparer();
+        //    this.concordance.Sort(comparer);
+        //}
+
+        //public void WordCountIncrement(string word)
+        //{
+        //    foreach (WordListItem i in concordance)
+        //    {
+        //        if (i.Word == word)
+        //            i.Count++;
+        //    }
+        //}
+
+        //public void WordOccurenceOnPage(string word, int page)
+        //{
+        //    foreach (WordListItem i in concordance)
+        //    {
+        //        if (i.Word == word && !i.Pages.Contains(page))
+        //            i.Pages.Add(page);
+        //    }
+        //}
+
+        //public bool ContainsWord(string word)
+        //{
+        //    foreach (WordListItem i in concordance)
+        //    {
+        //        if (i.Word == word)
+        //            return true;
+        //    }
+
+        //    return false;
+        //}
+
+        //public void Print()
+        //{
+        //    foreach (WordListItem i in concordance)
+        //    {
+        //        Console.Write("{0} .. {1} times: pages ", i.Word, i.Count);
+        //        for (int j = 0; j < i.Pages.Count; j++)
+        //        {
+        //            Console.Write("{0} ", i.Pages[j]);
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //}
+
+
+
+
+
+
+        public void Add(string key, List<PageLineCount> value)
+        {
+            this.concordance.Add(key, value);
         }
 
-        public void WordCountIncrement(string word)
+        public bool ContainsKey(string key)
         {
-            foreach (WordListItem i in concordance)
+            return this.concordance.ContainsKey(key);
+        }
+
+        public ICollection<string> Keys
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool Remove(string key)
+        {
+            return this.concordance.Remove(key);
+        }
+
+        public bool TryGetValue(string key, out List<PageLineCount> value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<List<PageLineCount>> Values
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public List<PageLineCount> this[string key]
+        {
+            get
             {
-                if (i.Word == word)
-                    i.Count++;
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
             }
         }
 
-        public void WordOccurenceOnPage(string word, int page)
+        public void Add(KeyValuePair<string, List<PageLineCount>> item)
         {
-            foreach (WordListItem i in concordance)
-            {
-                if (i.Word == word && !i.Pages.Contains(page))
-                    i.Pages.Add(page);
-            }
+            this.concordance.Add(item.Key, item.Value);
         }
 
-        public bool ContainsWord(string word)
+        public void Clear()
         {
-            foreach (WordListItem i in concordance)
-            {
-                if (i.Word == word)
-                    return true;
-            }
-
-            return false;
+            this.concordance.Clear();
         }
 
-        public void Print()
+        public bool Contains(KeyValuePair<string, List<PageLineCount>> item)
         {
-            foreach (WordListItem i in concordance)
-            {
-                Console.Write("{0} .. {1} times: pages ", i.Word, i.Count);
-                for (int j = 0; j < i.Pages.Count; j++)
-                {
-                    Console.Write("{0} ", i.Pages[j]);
-                }
-                Console.WriteLine();
-            }
+            return this.concordance.ContainsKey(item.Key) && this.concordance.ContainsValue(item.Value);//linq?
         }
 
-
-
-
-
-
-
-        private class WordListItemsComparer : IComparer<WordListItem>
+        public void CopyTo(KeyValuePair<string, List<PageLineCount>>[] array, int arrayIndex)
         {
-            public int Compare(WordListItem x, WordListItem y)
-            {
-                return String.Compare(x.Word, y.Word);
-            }
+            throw new NotImplementedException();
+        }
+
+        public int Count
+        {
+            get { return this.concordance.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool Remove(KeyValuePair<string, List<PageLineCount>> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<KeyValuePair<string, List<PageLineCount>>> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

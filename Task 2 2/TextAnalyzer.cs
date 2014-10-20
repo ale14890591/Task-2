@@ -16,12 +16,12 @@ namespace Task_2_2
 
         WordList result;
 
-        public TextAnalyzer()
-        {
-            result = new WordList();
-            wordOccurence += result.WordCountIncrement;
-            wordOccurenceOnPage += result.WordOccurenceOnPage;
-        }
+        //public TextAnalyzer()
+        //{
+        //    result = new WordList();
+        //    wordOccurence += result.WordCountIncrement;
+        //    wordOccurenceOnPage += result.WordOccurenceOnPage;
+        //}
 
         private static TextWork Normalizing(TextWork text)
         {
@@ -71,16 +71,13 @@ namespace Task_2_2
 
                     for (int i = 0; i < words.Length; i++)
                     {
-                        if (!result.ContainsWord(words[i]))
-                        {
-                            result.AddWord(words[i]);
-                        }
-                        
-                        if (wordOccurence != null && wordOccurenceOnPage != null)
-                        {
-                            wordOccurence(words[i]);
-                            wordOccurenceOnPage(words[i], page);
-                        }
+                        //if (!list.ContainsWord(words[i]))
+                        //{
+                        //    list.AddWord(words[i]);
+                        //}
+
+                        //list.WordOccurence(words[i]);
+                        //list.WordOccurenceOnPage(words[i], page);
                     }
                 }
             }
