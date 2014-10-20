@@ -22,12 +22,19 @@ namespace Task_2_2
             }
         }
 
+
+
         private List<WordListItem> concordance;
 
+
+        //constructor
         public WordList()
         {
             this.concordance = new List<WordListItem>();
         }
+
+
+
 
         public void AddWord(string word)
         {
@@ -37,7 +44,7 @@ namespace Task_2_2
             this.concordance.Sort(comparer);
         }
 
-        public void WordOccurence(string word)
+        public void WordCountIncrement(string word)
         {
             foreach (WordListItem i in concordance)
             {
@@ -78,6 +85,12 @@ namespace Task_2_2
                 Console.WriteLine();
             }
         }
+
+
+
+
+
+
 
         private class WordListItemsComparer : IComparer<WordListItem>
         {

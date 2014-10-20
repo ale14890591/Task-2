@@ -8,7 +8,22 @@ namespace Task_2_2
 {
     public class TextAnalyzer
     {
-        public TextWork Normalizing(TextWork text)
+        public delegate void MethodContainerString(string x);
+        public event MethodContainerString wordOccurence;
+
+        public delegate void MethodContainerStringInt(string x, int y);
+        public event MethodContainerStringInt wordOccurenceOnPage;
+
+        WordList result;
+
+        public TextAnalyzer()
+        {
+            result = new WordList();
+            wordOccurence += result.WordCountIncrement;
+            wordOccurenceOnPage += result.WordOccurenceOnPage;
+        }
+
+        private static TextWork Normalizing(TextWork text)
         {
             List<List<string>> normalizedText = new List<List<string>>();
 
@@ -44,7 +59,9 @@ namespace Task_2_2
 
         public WordList Analyzing(TextWork textForAnalysis)
         {
-            WordList list = new WordList();
+            textForAnalysis = Normalizing(textForAnalysis);
+
+             
 
             for (int page = 1; page <= textForAnalysis.Text.Count(); page++)
             {
@@ -54,18 +71,21 @@ namespace Task_2_2
 
                     for (int i = 0; i < words.Length; i++)
                     {
-                        if (!list.ContainsWord(words[i]))
+                        if (!result.ContainsWord(words[i]))
                         {
-                            list.AddWord(words[i]);
+                            result.AddWord(words[i]);
                         }
-
-                        list.WordOccurence(words[i]);
-                        list.WordOccurenceOnPage(words[i], page);
+                        
+                        if (wordOccurence != null && wordOccurenceOnPage != null)
+                        {
+                            wordOccurence(words[i]);
+                            wordOccurenceOnPage(words[i], page);
+                        }
                     }
                 }
             }
 
-            return list;
+            return result;
         }
     }
 }

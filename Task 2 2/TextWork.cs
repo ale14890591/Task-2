@@ -10,18 +10,16 @@ namespace Task_2_2
     public class TextWork
     {
         private List<List<string>> text;
-        private static int linesPerPage = 2;
+        private int linesPerPage = 2;
 
         public List<List<string>> Text
         {
             get { return text; }
         }
 
-        public static int LinesPerPage
-        {
-            get { return linesPerPage; }
-        }
 
+        
+        //constructors
         public TextWork(List<List<string>> text)
         {
             this.text = text;
