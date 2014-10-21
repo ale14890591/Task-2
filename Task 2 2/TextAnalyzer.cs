@@ -6,24 +6,9 @@ using System.Threading.Tasks;
 
 namespace Task_2_2
 {
-    public class TextAnalyzer
+    public static class TextAnalyzer
     {
-        public delegate void MethodContainerString(string x);
-        public event MethodContainerString wordOccurence;
-
-        public delegate void MethodContainerStringInt(string x, int y);
-        public event MethodContainerStringInt wordOccurenceOnPage;
-
-        WordList result;
-
-        //public TextAnalyzer()
-        //{
-        //    result = new WordList();
-        //    wordOccurence += result.WordCountIncrement;
-        //    wordOccurenceOnPage += result.WordOccurenceOnPage;
-        //}
-
-        private static TextWork Normalizing(TextWork text)
+        private static TextWork Normalize(TextWork text)
         {
             List<List<string>> normalizedText = new List<List<string>>();
 
@@ -34,14 +19,27 @@ namespace Task_2_2
                 for (int line = 0; line < text.Text[page].Count; line++)
                 {
                     List<char> Line = text.Text[page][line].ToList<char>();
+                    
+                    //bool nextLineIsNewSentence = false;
+                    //if (Line[Line.Count - 1] == '.' || Line[Line.Count - 1] == '?' || Line[Line.Count - 1] == '!')
+                    //    nextLineIsNewSentence = true;
 
-                    for (int symbol = 0; symbol < Line.Count; symbol++)
+                    for (int symbol = Line.Count - 1; symbol >= 0; symbol--)
                     {
-                        if (Char.IsLetter(Line[symbol]) && Char.IsUpper(Line[symbol]))
-                        {
-                            Line[symbol] = Char.ToLower(Line[symbol]);
-                            continue;
-                        }
+                        //try
+                        //{
+                        //    if (Char.IsLetter(Line[symbol]) && Char.IsUpper(Line[symbol]) &&
+                        //        (Line[symbol - 2] == '.' || Line[symbol - 2] == '?' || Line[symbol - 2] == '!'))
+                        //    {
+                        //        Line[symbol] = Char.ToLower(Line[symbol]);
+                        //        continue;
+                        //    }
+                        //}
+                        //catch(IndexOutOfRangeException)
+                        //{
+
+                        //}
+
                         if (!Char.IsLetter(Line[symbol]) && Line[symbol] != ' ')
                         {
                             Line.Remove(Line[symbol]);
@@ -57,27 +55,21 @@ namespace Task_2_2
             return new TextWork(normalizedText);
         }
 
-        public WordList Analyzing(TextWork textForAnalysis)
+        public static WordList Analyze(TextWork text)
         {
-            textForAnalysis = Normalizing(textForAnalysis);
+            WordList result = new WordList();
 
-             
+            text = Normalize(text);
 
-            for (int page = 1; page <= textForAnalysis.Text.Count(); page++)
+            for (int page = 1; page <= text.Text.Count(); page++)
             {
-                for (int line = 1; line <= textForAnalysis.Text[page - 1].Count(); line++)
+                for (int line = 1; line <= text.Text[page - 1].Count(); line++)
                 {
-                    string[] words = textForAnalysis.Text[page - 1][line - 1].Split(' ');
+                    string[] words = text.Text[page - 1][line - 1].Split(' ');
 
                     for (int i = 0; i < words.Length; i++)
                     {
-                        //if (!list.ContainsWord(words[i]))
-                        //{
-                        //    list.AddWord(words[i]);
-                        //}
-
-                        //list.WordOccurence(words[i]);
-                        //list.WordOccurenceOnPage(words[i], page);
+                        result.WordOccurence(words[i], page, line);
                     }
                 }
             }
