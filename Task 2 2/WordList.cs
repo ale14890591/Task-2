@@ -8,28 +8,32 @@ namespace Task_2_2
 {
     public class WordList
     {
-        //key - word, value - list contains (indexes means pages): 
-        //in which line word appeared, how many times it appeared in this line
-        private Dictionary<string, WordInfo> concordance;
-        
+        //key - word, value - information about how much times does this word appear in a certain line on a certain page
+        private SortedDictionary<string, WordInfo> concordance;
 
         //constructor
         public WordList()
         {
-            this.concordance = new Dictionary<string, WordInfo>();        
+            this.concordance = new SortedDictionary<string, WordInfo>();        
         }
-
+        
         public void Print()
         {
+            Func<KeyValuePair<int,int>, int> s = (KeyValuePair<int,int> i) =>{
+                return i.Value;
+                };
+            Func<KeyValuePair<int,Dictionary<int,int>>, int> sel = (KeyValuePair<int, Dictionary<int,int>> i) =>{
+                return i.Value.Sum<KeyValuePair<int, int>>(s);
+                };
             foreach (KeyValuePair<string, WordInfo> i in concordance)
-            {
-                Console.Write("{0} .. {1} times: pages ", i.Key, i.Value.Occurencies.Values.Sum(
-                
-                
-                for (int j = 0; j < i.Value.Occurencies.Keys.Count; j++)
-                {
-                    Console.Write("{0} ", i.Value.Occurencies.);
-                }
+            {                
+                Console.Write("{0} .. {1} times: pages ", i.Key, i.Value.Occurencies.Sum<KeyValuePair<int,Dictionary<int,int>>>(sel));
+
+                //for (int j = 0; j < i.Value.Occurencies.Keys.Count; j++)
+                //{
+                //    Console.Write("{0} ", i.Value.Occurencies.Values
+                //}
+
                 Console.WriteLine();
             }
         }

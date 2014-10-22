@@ -8,6 +8,7 @@ namespace Task_2_2
 {
     public class WordInfo
     {
+        //key - page, value - dictionary, where key - line, value - words per line
         private Dictionary<int, Dictionary<int, int>> occurencies;
 
         public Dictionary<int, Dictionary<int, int>> Occurencies

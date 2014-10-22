@@ -13,7 +13,7 @@ namespace Task_2_2
         {
             TextWork example = new TextWork(@"C:\Users\000\Desktop\a.txt");
             WordList resultOfAnalysis = TextAnalyzer.Analyze(example);
-            //resultOfAnalysis.Print();
+            resultOfAnalysis.Print();
             
 
             Console.ReadKey();
