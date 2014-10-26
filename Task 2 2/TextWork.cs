@@ -9,10 +9,10 @@ namespace Task_2_2
 {
     public class TextWork
     {
-        private List<List<string>> text;
-        private int linesPerPage = 2;
+        private List<Page> text;
+        //private int linesPerPage = 2;
 
-        public List<List<string>> Text
+        public List<Page> TextPole
         {
             get { return text; }
         }
@@ -20,24 +20,24 @@ namespace Task_2_2
 
         
         //constructors
-        public TextWork(List<List<string>> text)
+        public TextWork(List<Page> text)
         {
             this.text = text;
         }
 
         public TextWork(string path)
         {
-            text = new List<List<string>>();
+            text = new List<Page>();
 
             StreamReader reader = new StreamReader(path);
 
             while (!reader.EndOfStream)
             {
-                List<string> page = new List<string>();
+                Page page = new Page();
 
-                for (int line = 0; line < linesPerPage && !reader.EndOfStream; line++)
+                for (int line = 0; line < Page.LinesPerPage && !reader.EndOfStream; line++)
                 {
-                    page.Add(reader.ReadLine());
+                    page.PagePole.Add(new Line(reader.ReadLine()));
                 }
 
                 text.Add(page);
