@@ -19,16 +19,26 @@ namespace Task_2_2
         
         public void Print()
         {
+            string startLetter = this.concordance.First<KeyValuePair<Word, WordInfo>>().Key.WordPole.Substring(0,1);
+            Console.WriteLine(startLetter.ToUpper());
+
             Func<KeyValuePair<int,int>, int> s = (KeyValuePair<int,int> i) =>{
                 return i.Value;
                 };
             Func<KeyValuePair<int,Dictionary<int,int>>, int> sel = (KeyValuePair<int, Dictionary<int,int>> i) =>{
                 return i.Value.Sum<KeyValuePair<int, int>>(s);
                 };
-            foreach (KeyValuePair<Word, WordInfo> i in concordance)
-            {                
-                Console.Write("{0} .. {1} times: pages ", i.Key.WordPole, i.Value.Occurencies.Sum<KeyValuePair<int,Dictionary<int,int>>>(sel));
 
+            foreach (KeyValuePair<Word, WordInfo> i in concordance)
+            {
+                if (i.Key.WordPole.Substring(0, 1) != startLetter)
+                {
+                    startLetter = i.Key.WordPole.Substring(0, 1);
+                    Console.WriteLine("\n" + startLetter.ToUpper());
+                }
+
+                Console.Write("{0} .. {1} times: pages ", i.Key.WordPole, i.Value.Occurencies.Sum<KeyValuePair<int, Dictionary<int, int>>>(sel));
+         
                 foreach (int j in i.Value.Occurencies.Keys)
                 {
                     Console.Write(j + " ");
