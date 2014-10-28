@@ -10,13 +10,11 @@ namespace Task_2_2
     public class TextWork
     {
         private List<Page> text;
-        //private int linesPerPage = 2;
 
         public List<Page> TextPole
         {
             get { return text; }
         }
-
 
         
         //constructors

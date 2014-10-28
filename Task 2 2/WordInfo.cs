@@ -9,27 +9,27 @@ namespace Task_2_2
     public class WordInfo
     {
         //key - page, value - dictionary, where key - line, value - words per line
-        private Dictionary<int, Dictionary<int, int>> occurencies;
+        private Dictionary<PageNumber, Dictionary<LineNumber, WordsPerLine>> occurencies;
 
-        public Dictionary<int, Dictionary<int, int>> Occurencies
+        public Dictionary<PageNumber, Dictionary<LineNumber, WordsPerLine>> Occurencies
         {
             get { return occurencies; }
         }
 
         public WordInfo()
         {
-            occurencies = new Dictionary<int, Dictionary<int, int>>();
+            occurencies = new Dictionary<PageNumber, Dictionary<LineNumber, WordsPerLine>>();
         }
 
-        public void Occure(int page, int line)
+        public void Occure(PageNumber page, LineNumber line)
         {
             if (!occurencies.ContainsKey(page))
-                occurencies.Add(page, new Dictionary<int, int>());
+                occurencies.Add(page, new Dictionary<LineNumber, WordsPerLine>());
 
             if (!occurencies[page].ContainsKey(line))
-                occurencies[page].Add(line, 0);
+                occurencies[page].Add(line, new WordsPerLine(0));
 
-            occurencies[page][line]++;
+            occurencies[page][line].Increment();
         }
     }
 }

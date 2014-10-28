@@ -22,7 +22,7 @@ namespace Task_2_2
                     
                     foreach (Match i in mat)
                     {
-                        result.WordOccurence(new Word(i.ToString().ToLower()), page, line);
+                        result.WordOccurence(new Word(i.ToString().ToLower()), new PageNumber(page), new LineNumber(line));
                     }
                 }
             }

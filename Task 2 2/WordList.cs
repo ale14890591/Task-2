@@ -10,7 +10,7 @@ namespace Task_2_2
     {
         //key - word, value - information about how much times does this word appear in a certain line on a certain page
         private SortedDictionary<Word, WordInfo> concordance;
-
+        
         //constructor
         public WordList()
         {
@@ -22,13 +22,6 @@ namespace Task_2_2
             string startLetter = this.concordance.First<KeyValuePair<Word, WordInfo>>().Key.WordPole.Substring(0,1);
             Console.WriteLine(startLetter.ToUpper());
 
-            Func<KeyValuePair<int,int>, int> s = (KeyValuePair<int,int> i) =>{
-                return i.Value;
-                };
-            Func<KeyValuePair<int,Dictionary<int,int>>, int> sel = (KeyValuePair<int, Dictionary<int,int>> i) =>{
-                return i.Value.Sum<KeyValuePair<int, int>>(s);
-                };
-
             foreach (KeyValuePair<Word, WordInfo> i in concordance)
             {
                 if (i.Key.WordPole.Substring(0, 1) != startLetter)
@@ -37,18 +30,18 @@ namespace Task_2_2
                     Console.WriteLine("\n" + startLetter.ToUpper());
                 }
 
-                Console.Write("{0} .. {1} times: pages ", i.Key.WordPole, i.Value.Occurencies.Sum<KeyValuePair<int, Dictionary<int, int>>>(sel));
+                Console.Write("{0} .. {1} times: pages ", i.Key.WordPole, i.Value.Occurencies.Sum<KeyValuePair<PageNumber, Dictionary<LineNumber, WordsPerLine>>>(y => y.Value.Sum<KeyValuePair<LineNumber, WordsPerLine>>(x => x.Value.WordsPerLinePole)));
          
-                foreach (int j in i.Value.Occurencies.Keys)
+                foreach (PageNumber j in i.Value.Occurencies.Keys)
                 {
-                    Console.Write(j + " ");
+                    Console.Write(j.PageNumberPole + " ");
                 }
 
                 Console.WriteLine();
             }
         }
 
-        public void WordOccurence(Word key, int page, int line)
+        public void WordOccurence(Word key, PageNumber page, LineNumber line)
         {
             if (!this.concordance.ContainsKey(key))
             {

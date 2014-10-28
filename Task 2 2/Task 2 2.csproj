@@ -57,14 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Line.cs" />
+    <Compile Include="LineNumber.cs" />
+    <Compile Include="WordsPerLine.cs" />
     <Compile Include="Page.cs" />
+    <Compile Include="PageNumber.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextWork.cs" />
     <Compile Include="TextAnalyzer.cs" />
     <Compile Include="Word.cs" />
-    <Compile Include="WordInfo.cs" />
     <Compile Include="WordList.cs" />
+    <Compile Include="WordInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
