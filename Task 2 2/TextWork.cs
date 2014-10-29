@@ -11,7 +11,7 @@ namespace Task_2_2
     {
         private List<Page> text;
 
-        public List<Page> TextPole
+        public List<Page> Text
         {
             get { return text; }
         }
@@ -35,7 +35,7 @@ namespace Task_2_2
 
                 for (int line = 0; line < Page.LinesPerPage && !reader.EndOfStream; line++)
                 {
-                    page.PagePole.Add(new Line(reader.ReadLine()));
+                    page.Value.Add(new Line(reader.ReadLine()));
                 }
 
                 text.Add(page);

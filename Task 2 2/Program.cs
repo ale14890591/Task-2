@@ -11,12 +11,9 @@ namespace Task_2_2
     {
         static void Main(string[] args)
         {
-            TextWork example = new TextWork(@"C:\Users\000\Desktop\b.txt");
+            TextWork example = new TextWork(@"C:\Users\000\Desktop\a.txt");
             WordList resultOfAnalysis = TextAnalyzer.Analyze(example);
-            resultOfAnalysis.Print();
-            
-
-            Console.ReadKey();
+            resultOfAnalysis.OutputToFile(@"C:\Users\000\Desktop\sgdsg.txt");
         }
     }
 }

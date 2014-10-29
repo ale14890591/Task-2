@@ -8,7 +8,7 @@ namespace Task_2_2
 {
     public class Page
     {
-        public List<Line> PagePole { get; set; }
+        public List<Line> Value { get; set; }
         private static int linesPerPage = 2;
 
         public static int LinesPerPage
@@ -18,7 +18,7 @@ namespace Task_2_2
 
         public Page()
         {
-            this.PagePole = new List<Line>();
+            this.Value = new List<Line>();
         }
     }
 }

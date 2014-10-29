@@ -17,27 +17,75 @@ namespace Task_2_2
             this.concordance = new SortedDictionary<Word, WordInfo>();        
         }
         
-        public void Print()
+        public void OutputToConsole()
         {
-            string startLetter = this.concordance.First<KeyValuePair<Word, WordInfo>>().Key.WordPole.Substring(0,1);
-            Console.WriteLine(startLetter.ToUpper());
+            IEnumerable<GlossaryItem<string, int>> glossary = concordance.Select(x => new GlossaryItem<string, int>()
+                {
+                    Key = x.Key.Value,
+                    Count = x.Value.Occurencies.Sum(a => a.Value.Sum(b => b.Value.Value)),
+                    Occuriences = x.Value.Occurencies.Keys.Distinct(new PageNumberComparer()).Select(c => c.Value)
+                }).OrderBy(x => x.Key);
 
-            foreach (KeyValuePair<Word, WordInfo> i in concordance)
+            var groupByFirstLetter = from x in glossary
+                    group x by x.Key.Substring(0, 1)
+                        into p
+                        orderby p.Key
+                        select p;
+
+            foreach(var i in groupByFirstLetter)
             {
-                if (i.Key.WordPole.Substring(0, 1) != startLetter)
+                Console.WriteLine(i.Key.ToUpper());
+                
+                foreach(var j in i)
                 {
-                    startLetter = i.Key.WordPole.Substring(0, 1);
-                    Console.WriteLine("\n" + startLetter.ToUpper());
-                }
-
-                Console.Write("{0} .. {1} times: pages ", i.Key.WordPole, i.Value.Occurencies.Sum<KeyValuePair<PageNumber, Dictionary<LineNumber, WordsPerLine>>>(y => y.Value.Sum<KeyValuePair<LineNumber, WordsPerLine>>(x => x.Value.WordsPerLinePole)));
-         
-                foreach (PageNumber j in i.Value.Occurencies.Keys)
-                {
-                    Console.Write(j.PageNumberPole + " ");
+                    Console.Write("{0} .. {1} times: pages ", j.Key, j.Count);
+                    foreach (var item in j.Occuriences)
+                    {
+                        Console.Write("{0} ", item);
+                    }
+                    Console.WriteLine();
                 }
 
                 Console.WriteLine();
+            }
+        }
+
+        public void OutputToFile(string path)
+        {
+            using (System.IO.StreamWriter w = new System.IO.StreamWriter(path))
+            {
+                IEnumerable<GlossaryItem<string, int>> glossary = this.concordance.Select(x => new GlossaryItem<string, int>()
+                {
+                    Key = x.Key.Value,
+                    Count = x.Value.Occurencies.Sum(a => a.Value.Sum(b => b.Value.Value)),
+                    Occuriences = x.Value.Occurencies.Keys.Distinct(new PageNumberComparer()).Select(c => c.Value)
+                }).OrderBy(x => x.Key);
+
+                var groupByFirstLetter = from x in glossary
+                                          group x by x.Key.Substring(0, 1)
+                                              into p
+                                              orderby p.Key
+                                              select p;
+
+                
+                foreach (var i in groupByFirstLetter)
+                {
+                    w.WriteLine(i.Key.ToUpper());
+
+                    foreach (var j in i)
+                    {
+                        w.Write("{0} .. {1} times: pages ", j.Key, j.Count);
+
+                        foreach (var item in j.Occuriences)
+                        {
+                            w.Write("{0} ", item);
+                        }
+
+                        w.WriteLine();
+                    }
+
+                    w.WriteLine();
+                }
             }
         }
 

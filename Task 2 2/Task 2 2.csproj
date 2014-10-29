@@ -56,8 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlossaryItem.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="LineNumber.cs" />
+    <Compile Include="PageNumberComparer.cs" />
     <Compile Include="WordsPerLine.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageNumber.cs" />

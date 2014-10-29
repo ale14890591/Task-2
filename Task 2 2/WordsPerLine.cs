@@ -8,16 +8,16 @@ namespace Task_2_2
 {
     public class WordsPerLine
     {
-        public int WordsPerLinePole { get; set; }
+        public int Value { get; set; }
 
         public WordsPerLine(int x)
         {
-            this.WordsPerLinePole = x;
+            this.Value = x;
         }
 
         public void Increment()
         {
-            this.WordsPerLinePole++;
+            this.Value++;
         }
     }
 }

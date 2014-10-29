@@ -8,11 +8,11 @@ namespace Task_2_2
 {
     public class Line
     {
-        public string LinePole { get; set; }
+        public string Value { get; set; }
 
         public Line(string line)
         {
-            this.LinePole = line;
+            this.Value = line;
         }
     }
 }

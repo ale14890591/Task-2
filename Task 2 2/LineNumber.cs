@@ -8,11 +8,11 @@ namespace Task_2_2
 {
     public class LineNumber
     {
-        public int LineNumberPole { get; set; }
+        public int Value { get; set; }
 
         public LineNumber(int x)
         {
-            this.LineNumberPole = x;
+            this.Value = x;
         }
     }
 }

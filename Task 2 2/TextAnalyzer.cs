@@ -13,12 +13,12 @@ namespace Task_2_2
         {
             WordList result = new WordList();
 
-            for (int page = 1; page <= text.TextPole.Count(); page++)
+            for (int page = 1; page <= text.Text.Count(); page++)
             {
-                for (int line = 1; line <= text.TextPole[page - 1].PagePole.Count(); line++)
+                for (int line = 1; line <= text.Text[page - 1].Value.Count(); line++)
                 {
                     Regex reg = new Regex(@"\w{1,}");
-                    MatchCollection mat = reg.Matches(text.TextPole[page - 1].PagePole[line - 1].LinePole);
+                    MatchCollection mat = reg.Matches(text.Text[page - 1].Value[line - 1].Value);
                     
                     foreach (Match i in mat)
                     {

@@ -8,11 +8,16 @@ namespace Task_2_2
 {
     public class PageNumber
     {
-        public int PageNumberPole { get; set; }
+        public int Value { get; set; }
 
         public PageNumber(int x)
         {
-            this.PageNumberPole = x;
+            this.Value = x;
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
         }
     }
 }
